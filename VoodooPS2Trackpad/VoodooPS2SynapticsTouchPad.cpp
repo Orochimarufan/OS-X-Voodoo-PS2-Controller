@@ -1047,7 +1047,7 @@ void ApplePS2SynapticsTouchPad::dispatchEventsWithPacket(UInt8* packet, UInt32 p
     UInt32 buttonsraw = packet[0] & 0x03; // mask for just R L
     UInt32 buttons = buttonsraw;
     
-    if(trackPointOverride > 0) {buttons == lastbuttons;}
+    if(trackPointOverride > 0) {buttons = lastbuttons;}
 #ifdef SIMULATE_PASSTHRU
     if (passthru && 3 != w)
         trackbuttons = buttons;
@@ -1111,7 +1111,7 @@ void ApplePS2SynapticsTouchPad::dispatchEventsWithPacket(UInt8* packet, UInt32 p
         return;
     }
     
-    if (buttons == 3 && trackPointOverride == 3) {buttons == 0;}
+    if (buttons == 3 && trackPointOverride == 3) {buttons = 0;}
     
     // otherwise, deal with normal wmode touchpad packet
     int xraw = packet[4]|((packet[1]&0x0f)<<8)|((packet[3]&0x10)<<8);
